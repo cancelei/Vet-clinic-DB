@@ -22,26 +22,25 @@ REQUIRED SECTIONS:
 After you're finished please remove all the comments and instructions!
 -->
 
-
 <!-- TABLE OF CONTENTS -->
 
 # 📗 Table of Contents
 
 - [📖 About the Project](#about-project)
+
   - [🛠 Built With](#built-with)
     - [Tech Stack](#tech-stack)
     - [Key Features](#key-features)
-  <!-- - [🚀 Live Demo](#live-demo) -->
+
 - [💻 Getting Started](#getting-started)
+
   - [Setup](#setup)
   - [Prerequisites](#prerequisites)
   - [Install](#install)
   - [Usage](#usage)
-  - [Run tests](#run-tests)
-  - [Deployment](#triangular_flag_on_post-deployment)
+
 - [👥 Authors](#authors)
 - [🔭 Future Features](#future-features)
-- [🤝 Contributing](#contributing)
 - [⭐️ Show your support](#support)
 - [🙏 Acknowledgements](#acknowledgements)
 - [❓ FAQ](#faq)
@@ -51,7 +50,7 @@ After you're finished please remove all the comments and instructions!
 
 # 📖 [Veterinarian Data Base using Postgress] <a name="about-project"></a>
 
-**Veterinarian Data Base using Postgress** is a project that uses a data base to store information about veterinarians and their patients. Using postgress, the data base is set up and queries are used to filter the data. 
+**Veterinarian Data Base using Postgress** is a project that uses a data base to store information about veterinarians and their patients. Using postgress, the data base is set up and queries are used to filter the data.
 
 ## 🛠 Built With <a name="built-with"></a>
 
@@ -64,25 +63,11 @@ After you're finished please remove all the comments and instructions!
   </ul>
 </details>
 
-<!-- Features -->
-
 ### Key Features <a name="key-features"></a>
 
 - **Vet Data Base Set Up**
 - **Queries to filter from data set**
 - **Schema for the data set**
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- LIVE DEMO -->
-
-<!-- ## 🚀 Live Demo <a name="live-demo"></a>
-
-> Add a link to your deployed project.
-
-- [Live Demo Link](<replace-with-your-deployment-URL>) -->
-
-<!-- <p align="right">(<a href="#readme-top">back to top</a>)</p> -->
 
 <!-- GETTING STARTED -->
 
