@@ -97,8 +97,6 @@ To run the project:
 
 ## 👥 Authors <a name="authors"></a>
 
-> Mention all of the collaborators of this project.
-
 👤 **Glauber Bannwart**
 
 - GitHub: [@cancelei](https://github.com/cancelei)
