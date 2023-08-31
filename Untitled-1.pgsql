@@ -1,11 +1,24 @@
--- Find all animalswhose name ends in "mon".
+/* Database schema to keep the structure of entire database. */
+
+CREATE TABLE animals (
+    name varchar(100),
+    date_of_birth date,
+    escape_attempts integer,
+    neutered boolean,
+    weight_kg decimal);
+    
+/*Queries that provide answers to the questions from all projects.*/
+
+SELECT * from animals WHERE name = 'Luna';
+
+-- Find all animals whose name ends in "mon".
 SELECT * FROM animals WHERE name LIKE '%mon';
 
 -- List the name of all animals born between 2016 and 2019.
 SELECT * FROM animals WHERE date_of_birth BETWEEN '2016-01-01' AND '2019-12-31';
 
 -- List the name of all animals that are neutered and have less than 3 escape attempts.
-SELECT name FROM animals WHERE neutered = true AND escape_attempts < 3;
+SELECT * FROM animals WHERE neutered = true AND escape_attempts < 3;
 
 -- List the date of birth of all animals named either "Agumon" or "Pikachu".
 SELECT date_of_birth FROM animals WHERE name = 'Agumon' OR name = 'Pikachu';
