@@ -1,29 +1,4 @@
 <a name="readme-top"></a>
-
-<!--
-HOW TO USE:
-This is an example of how you may give instructions on setting up your project locally.
-
-Modify this file to match your project and remove sections that don't apply.
-
-REQUIRED SECTIONS:
-- Table of Contents
-- About the Project
-  - Built With
-  - Live Demo
-- Getting Started
-- Authors
-- Future Features
-- Contributing
-- Show your support
-- Acknowledgements
-- License
-
-After you're finished please remove all the comments and instructions!
--->
-
-<!-- TABLE OF CONTENTS -->
-
 # 📗 Table of Contents
 
 - [📖 About the Project](#about-project)
@@ -43,7 +18,6 @@ After you're finished please remove all the comments and instructions!
 - [🔭 Future Features](#future-features)
 - [⭐️ Show your support](#support)
 - [🙏 Acknowledgements](#acknowledgements)
-- [❓ FAQ](#faq)
 - [📝 License](#license)
 
 <!-- PROJECT DESCRIPTION -->
@@ -68,6 +42,11 @@ After you're finished please remove all the comments and instructions!
 - **Updated Vet Data Base**
 - **Queries to filter from data set**
 - **Schema for the data set**
+- **Use primary key & foreign key mechanism for joining tables.**
+- **Query multiple tables.**
+- **Prepare complex queries that answer analytical questions.**
+- **Use aggregate functions to answer analytical questions.**
+- **Use subqueries to answer analytical questions.**
 
 <!-- GETTING STARTED -->
 
@@ -100,7 +79,7 @@ To run the project:
 👤 **Glauber Bannwart**
 
 - GitHub: [@cancelei](https://github.com/cancelei)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/linkedinhandle)
+- LinkedIn: [LinkedIn](https://linkedin.com/in/gbannwart)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -108,12 +87,10 @@ To run the project:
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-> Describe 1 - 3 features you will add to the project.
-
 - [X] **Update Vet Data Base**
-- [ ] **Improve Queries**
+- [X] **Improve Queries**
 - [X] **Add/Delete data base table rows**
-- [ ] **Add/Delete data base constraints**
+- [X] **Add/Delete data base constraints**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
