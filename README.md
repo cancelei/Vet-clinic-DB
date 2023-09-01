@@ -47,6 +47,9 @@
 - **Prepare complex queries that answer analytical questions.**
 - **Use aggregate functions to answer analytical questions.**
 - **Use subqueries to answer analytical questions.**
+- **Understand the different types of relationships between tables.**
+- **Prepare complex queries that answer analytical questions.**
+- **Use primary key & foreign key mechanism for joining tables.**
 
 <!-- GETTING STARTED -->
 
