@@ -65,7 +65,7 @@ After you're finished please remove all the comments and instructions!
 
 ### Key Features <a name="key-features"></a>
 
-- **Vet Data Base Set Up**
+- **Updated Vet Data Base**
 - **Queries to filter from data set**
 - **Schema for the data set**
 
@@ -110,9 +110,10 @@ To run the project:
 
 > Describe 1 - 3 features you will add to the project.
 
-- [ ] **Update Vet Data Base**
+- [X] **Update Vet Data Base**
 - [ ] **Improve Queries**
-- [ ] **Add/Delete data base table rows**
+- [X] **Add/Delete data base table rows**
+- [ ] **Add/Delete data base constraints**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
