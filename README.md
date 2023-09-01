@@ -68,6 +68,11 @@ After you're finished please remove all the comments and instructions!
 - **Updated Vet Data Base**
 - **Queries to filter from data set**
 - **Schema for the data set**
+- **Use primary key & foreign key mechanism for joining tables.**
+- **Query multiple tables.**
+- **Prepare complex queries that answer analytical questions.**
+- **Use aggregate functions to answer analytical questions.**
+- **Use subqueries to answer analytical questions.**
 
 <!-- GETTING STARTED -->
 
@@ -108,12 +113,10 @@ To run the project:
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-> Describe 1 - 3 features you will add to the project.
-
 - [X] **Update Vet Data Base**
-- [ ] **Improve Queries**
+- [X] **Improve Queries**
 - [X] **Add/Delete data base table rows**
-- [ ] **Add/Delete data base constraints**
+- [X] **Add/Delete data base constraints**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
