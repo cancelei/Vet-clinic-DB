@@ -3,6 +3,7 @@
 CREATE TABLE animals (
     id serial PRIMARY KEY,
     name varchar(100),
+    spicies varchar(100),
     date_of_birth date,
     escape_attempts integer,
     neutered boolean,
