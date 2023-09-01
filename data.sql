@@ -19,3 +19,42 @@ INSERT INTO animals (name, date_of_birth, weight_kg, neutered, escape_attempts) 
 INSERT INTO animals (name, date_of_birth, weight_kg, neutered, escape_attempts) VALUES ('Boarmon', '2005-06-07', 20.4, true, 7);
 INSERT INTO animals (name, date_of_birth, weight_kg, neutered, escape_attempts) VALUES ('Blossom', '1998-10-13', 17, true, 3);
 INSERT INTO animals (name, date_of_birth, weight_kg, neutered, escape_attempts) VALUES ('Ditto', '2022-05-14', 22, true, 4);
+
+-- Insert the following data into the owners table:
+-- Sam Smith 34 years old.
+-- Jennifer Orwell 19 years old.
+-- Bob 45 years old.
+-- Melody Pond 77 years old.
+-- Dean Winchester 14 years old.
+-- Jodie Whittaker 38 years old.
+-- Insert the following data into the species table:
+-- Pokemon
+-- Digimon
+-- Modify your inserted animals so it includes the species_id value:
+-- If the name ends in "mon" it will be Digimon
+-- All other animals are Pokemon
+-- Modify your inserted animals to include owner information (owner_id):
+-- Sam Smith owns Agumon.
+-- Jennifer Orwell owns Gabumon and Pikachu.
+-- Bob owns Devimon and Plantmon.
+-- Melody Pond owns Charmander, Squirtle, and Blossom.
+-- Dean Winchester owns Angemon and Boarmon.
+
+INSERT INTO owners (full_name, age) VALUES ('Sam Smith', 34);
+INSERT INTO owners (full_name, age) VALUES ('Jennifer Orwell', 19);
+INSERT INTO owners (full_name, age) VALUES ('Bob', 45);
+INSERT INTO owners (full_name, age) VALUES ('Melody Pond', 77);
+INSERT INTO owners (full_name, age) VALUES ('Dean Winchester', 14);
+INSERT INTO owners (full_name, age) VALUES ('Jodie Whittaker', 38);
+
+INSERT INTO species (name) VALUES ('Pokemon');
+INSERT INTO species (name) VALUES ('Digimon');
+
+UPDATE animals SET species_id = 2 WHERE name LIKE '%mon';
+UPDATE animals SET species_id = 1 WHERE species_id IS NULL;
+
+UPDATE animals SET owner_id = 1 WHERE name = 'Agumon';
+UPDATE animals SET owner_id = 2 WHERE name = 'Gabumon' OR name = 'Pikachu';
+UPDATE animals SET owner_id = 3 WHERE name = 'Devimon' OR name = 'Plantmon';
+UPDATE animals SET owner_id = 4 WHERE name = 'Charmander' OR name = 'Squirtle' OR name = 'Blossom';
+UPDATE animals SET owner_id = 5 WHERE name = 'Angemon' OR name = 'Boarmon';
