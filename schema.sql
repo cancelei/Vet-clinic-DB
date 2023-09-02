@@ -1,39 +1,48 @@
 /* Database schema to keep the structure of entire database. */
 
-CREATE TABLE animals (
-    id serial PRIMARY KEY,
-    name varchar(100),
+create table animals (
+    id serial primary key,
+    name varchar(20),
     date_of_birth date,
-    escape_attempts integer,
+    escape_attempts int,
     neutered boolean,
-    weight_kg decimal);
+    weight_kg decimal,
+    species varchar(20)
+);
 
-ALTER TABLE animals ADD COLUMN species varchar(100);
+create table owners (
+    id serial primary key,
+    name varchar(50),
+    age int
+);
 
--- Create a table named owners with the following columns:
--- id: integer (set it as autoincremented PRIMARY KEY)
--- full_name: string
--- age: integer
--- Create a table named species with the following columns:
--- id: integer (set it as autoincremented PRIMARY KEY)
--- name: string
--- Modify animals table:
--- Make sure that id is set as autoincremented PRIMARY KEY
--- Remove column species
--- Add column species_id which is a foreign key referencing species table
--- Add column owner_id which is a foreign key referencing the owners table
+create table species (
+    id serial primary key,
+    name varchar(20)
+);
 
-CREATE TABLE owners (
-    id serial PRIMARY KEY,
-    full_name varchar(100),
-    age integer);
+alter table animals drop column species;
 
-CREATE TABLE species (
-    id serial PRIMARY KEY,
-    name varchar(100));
+alter table animals add column species_id int, add constraint fk_species foreign key (species_id) REFERENCES species(id);
 
-ALTER TABLE animals DROP COLUMN species;
+alter table animals add COLUMN owner_id int, add constraint fk_owners foreign key (owner_id) REFERENCES owners(id);
 
-ALTER TABLE animals ADD COLUMN species_id integer REFERENCES species(id);
+create table vets (
+    id serial primary key,
+    name varchar(30),
+    age int,
+    date_of_graduation date
+);
 
-ALTER TABLE animals ADD COLUMN owner_id integer REFERENCES owners(id);
+create table specializations (
+    vet_id int references vets(id),
+    species_id int references species(id),
+    primary key (vet_id, species_id)
+);
+
+create table visits (
+    animal_id int references animals(id),
+    vet_id int references vets(id),
+    visit_date date,
+    primary key (animal_id, vet_id, visit_date)
+);
