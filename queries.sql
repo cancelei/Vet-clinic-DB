@@ -1,112 +1,119 @@
--- Find all animalswhose name ends in "mon".
+/*Queries that provide answers to the questions from all projects.*/
+
 SELECT * FROM animals WHERE name LIKE '%mon';
-
--- List the name of all animals born between 2016 and 2019.
-SELECT * FROM animals WHERE date_of_birth BETWEEN '2016-01-01' AND '2019-12-31';
-
--- List the name of all animals that are neutered and have less than 3 escape attempts.
+SELECT name FROM animals WHERE date_of_birth BETWEEN '2016-01-01' AND '2019-12-31';
 SELECT name FROM animals WHERE neutered = true AND escape_attempts < 3;
-
--- List the date of birth of all animals named either "Agumon" or "Pikachu".
-SELECT date_of_birth FROM animals WHERE name = 'Agumon' OR name = 'Pikachu';
-
--- List name and escape attempts of animals that weigh more than 10.5kg
+SELECT date_of_birth FROM animals WHERE name IN ('Agumon', 'Pikachu');
 SELECT name, escape_attempts FROM animals WHERE weight_kg > 10.5;
-
--- Find all animals that are neutered.
 SELECT * FROM animals WHERE neutered = true;
-
--- Find all animals not named Gabumon.
-SELECT * FROM animals WHERE name != 'Gabumon';
-
--- Find all animals with a weight between 10.4kg and 17.3kg (including the animals with the weights that equals precisely 10.4kg or 17.3kg)
+SELECT * FROM animals WHERE name <> 'Gabumon';
 SELECT * FROM animals WHERE weight_kg BETWEEN 10.4 AND 17.3;
 
--- TRANSACTIONS:
+begin;
+update animals set species = 'unspecified';
+select * from animals;
+rollback;
 
--- T1: Inside a transaction update the animals table by setting the species column to unspecified. Verify that change was made. Then roll back the change and verify that the species columns went back to the state before the transaction.
-BEGIN;
-UPDATE animals SET species = 'unspecified';
-SELECT * FROM animals;
-ROLLBACK;
-SELECT * FROM animals;
+begin;
+update animals set species = 'Digimon' where name like '%mon';
+update animals set species = 'Pokemon' where species is null;
+commit;
 
--- T2:
--- Update the animals table by setting the species column to digimon for all animals that have a name ending in mon.
--- Update the animals table by setting the species column to pokemon for all animals that don't have species already set.
--- Verify that changes were made.
--- Commit the transaction.
--- Verify that changes persist after commit.
+begin;
+delete from animals;
+rollback;
 
-BEGIN;
-UPDATE animals SET species = 'digimon' WHERE name LIKE '%mon';
-UPDATE animals SET species = 'pokemon' WHERE species IS NULL;
-SELECT * FROM animals;
-COMMIT;
-SELECT * FROM animals;
+begin;
+delete from animals where date_of_birth > '2022-01-01';
+SAVEPOINT checkpoint;
+update animals set weight_kg = -weight_kg;
+ROLLBACK TO checkpoint;
+update animals set weight_kg = -weight_kg where weight_kg < 0;
+commit;
 
--- T3: Inside a transaction delete all records in the animals table, then roll back the transaction. After the rollback verify if all records in the animals table still exists.
+select COUNT(*) from animals;
+select COUNT(*) from animals where escape_attempts = 0;
+select AVG(weight_kg) from animals;
+select neutered, SUM(escape_attempts) as total_escape_attempts from animals group by neutered;
+select species, MIN(weight_kg) as min_weight, MAX(weight_kg) as max_weight FROM animals GROUP BY species;
+select species, AVG(escape_attempts) as avg_escape_attempts from animals where EXTRACT(year from date_of_birth) between 1990 and 2000 group by species;
 
-BEGIN;
-DELETE FROM animals;
-ROLLBACK;
-SELECT * FROM animals;
+select x.name from animals x join owners y on x.owner_id = y.id where y.full_name = 'Melody Pond';
 
--- T4: Inside a transaction:
--- Delete all animals born after Jan 1st, 2022.
--- Create a savepoint for the transaction.
--- Update all animals' weight to be their weight multiplied by -1.
--- Rollback to the savepoint
--- Update all animals' weights that are negative to be their weight multiplied by -1.
--- Commit transaction
+select x.name from animals x join species y on x.species_id = y.id
+where y.name = 'Pokemon';
 
-BEGIN;
-DELETE FROM animals WHERE date_of_birth > '2022-01-01';
-SAVEPOINT my_savepoint;
-UPDATE animals SET weight_kg = weight_kg * -1;
-ROLLBACK TO my_savepoint;
-UPDATE animals SET weight_kg = weight_kg * -1 WHERE weight_kg < 0;
-COMMIT;
+select x.full_name, y.name from owners x left join animals y on x.id = y.owner_id;
 
--- T5 Set of queries to answer questions:
--- How many animals are there?
-SELECT COUNT(*) FROM animals;
+select x.name, COUNT(y.id) as total_animals FROM species x left join animals y on x.id = y.species_id
+group by x.name;
 
--- How many animals have never tried to escape?
-SELECT COUNT(*) FROM animals WHERE escape_attempts = 0;
+select x.name from animals x join species y on x.species_id = y.id join owners z on x.owner_id = z.id
+where z.full_name = 'Jennifer Orwell' and y.name = 'Digimon';
 
--- What is the average weight of animals?
-SELECT AVG(weight_kg) FROM animals;
+select x.name from animals x join owners y ON x.owner_id = y.id
+where y.full_name = 'Dean Winchester' AND x.escape_attempts = 0;
 
--- Who escapes the most, neutered or not neutered animals?
-SELECT neutered, MAX(escape_attempts) FROM animals GROUP BY neutered;
+select x.full_name, COUNT(y.id) as total_animals from owners x left join animals y ON x.id = y.owner_id
+group by x.full_name
+order by total_animals desc limit 1;
 
--- What is the minimum and maximum weight of each type of animal?
-SELECT species, MIN(weight_kg), MAX(weight_kg) FROM animals GROUP BY species;
+-- Part 4
 
--- What is the average number of escape attempts per animal type of those born between 1990 and 2000?
-SELECT species, AVG(escape_attempts) FROM animals WHERE date_of_birth BETWEEN '1990-01-01' AND '2000-12-31' GROUP BY species;
+select x.name from animals x 
+join visits y on x.id = y.animal_id
+join vets z on y.vet_id = z.id
+where z.name = 'William Tatcher'
+order by y.visit_date desc limit 1;
 
--- Write queries (using JOIN) to answer the following questions:
--- What animals belong to Melody Pond?
--- List of all animals that are pokemon (their type is Pokemon).
--- List all owners and their animals, remember to include those that don't own any animal.
--- How many animals are there per species?
--- List all Digimon owned by Jennifer Orwell.
--- List all animals owned by Dean Winchester that haven't tried to escape.
--- Who owns the most animals?
+select COUNT(distinct x.animal_id) as total_animals
+from visits x
+join vets y on x.vet_id = y.id
+where y.name = 'Stephanie Mendez';
 
-SELECT * FROM animals JOIN owners ON animals.owner_id = owners.id WHERE owners.full_name = 'Melody Pond';
+select x.name, y.name as specialty
+from vets x
+left join specializations z on x.id = z.vet_id
+left join species y on z.species_id = y.id;
 
-SELECT * FROM animals JOIN species ON animals.species_id = species.id WHERE species.name = 'Pokemon';
+select x.name from animals x
+join visits y on x.id = y.animal_id
+join vets z on y.vet_id = z.id
+where z.name = 'Stephanie Mendez'
+and y.visit_date between '2020-04-01' and '2020-08-30';
 
-SELECT * FROM owners LEFT JOIN animals ON owners.id = animals.owner_id;
+select x.name
+from animals x
+join visits y on x.id = y.animal_id
+group by x.id
+order by COUNT(*) desc limit 1;
 
-SELECT species.name, COUNT(*) FROM animals JOIN species ON animals.species_id = species.id GROUP BY species.name;
+select x.name as veterinarian, y.name as patient, z.visit_date
+from visits z
+join vets x on vet_id = x.id
+join animals y on animal_id = y.id
+where x.name = 'Maisy Smith'
+order by visit_date limit 1;
 
-SELECT * FROM animals JOIN owners ON animals.owner_id = owners.id WHERE owners.full_name = 'Jennifer Orwell' AND species_id = 2;
+select x.name as animal_name, y.name as vet_name, z.visit_date
+from visits z
+join animals x on z.animal_id = x.id
+join vets y on z.vet_id = y.id
+order by z.visit_date desc limit 1;
 
-SELECT * FROM animals JOIN owners ON animals.owner_id = owners.id WHERE owners.full_name = 'Dean Winchester' AND escape_attempts = 0;
+select COUNT(*) as num_visits
+from visits x
+join animals y on x.animal_id = y.id
+join vets z on x.vet_id = z.id
+left join specializations sp on z.id = sp.vet_id and y.species_id = sp.species_id
+where sp.vet_id is null;
 
-SELECT full_name, COUNT(*) FROM animals JOIN owners ON animals.owner_id = owners.id GROUP BY full_name ORDER BY COUNT(*) DESC LIMIT 1;
-
+select x.name as veterinarian,
+COUNT(case when y.name = 'Pokemon' then 1 else null end) as visits_of_Pokemons,
+COUNT(case when y.name = 'Digimon' then 1 else null end) as visits_of_Digimons
+from visits
+join vets x on vet_id = x.id
+join animals z on visits.animal_id = z.id
+join species y on species_id = y.id
+where x.name = 'Maisy Smith'
+group by x.name;
